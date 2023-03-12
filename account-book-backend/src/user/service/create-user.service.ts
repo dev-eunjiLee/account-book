@@ -12,6 +12,12 @@ export class CreateUserService implements CreateUserInboundPort {
   ): Promise<CreateUserInboundPortOutputDto> {
     console.log(params);
 
+    /**
+     * TODO 계정 생성용 outbound port 및 outbound adapter 셋팅
+     * TODO DB 연결용 typeorm 셋팅
+     *
+     */
+
     return Promise.resolve(undefined);
   }
 }
