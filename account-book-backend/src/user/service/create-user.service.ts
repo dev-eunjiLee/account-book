@@ -3,21 +3,29 @@ import {
   CreateUserInboundPortInputDto,
   CreateUserInboundPortOutputDto,
 } from '../inbound-port/create-user.inbound-port';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import {
+  CREATE_USER_OUTBOUND_PORT,
+  CreateUserOutboundPort,
+} from '../outbound-port/create-user.outbound-port';
 
 @Injectable()
 export class CreateUserService implements CreateUserInboundPort {
-  execute(
+  constructor(
+    @Inject(CREATE_USER_OUTBOUND_PORT)
+    private readonly createUserOutboundPort: CreateUserOutboundPort,
+  ) {}
+
+  async execute(
     params: CreateUserInboundPortInputDto,
   ): Promise<CreateUserInboundPortOutputDto> {
     console.log(params);
 
-    /**
-     * TODO 계정 생성용 outbound port 및 outbound adapter 셋팅
-     * TODO DB 연결용 typeorm 셋팅
-     *
-     */
-
-    return Promise.resolve(undefined);
+    try {
+      await this.createUserOutboundPort.execute(params);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   }
 }
