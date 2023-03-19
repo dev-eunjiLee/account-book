@@ -3,7 +3,7 @@ import { User } from '../entity/user.entity';
 export const CREATE_USER_OUTBOUND_PORT = 'CREATE_USER_OUTBOUND_PORT';
 
 export type CreateUserOutboundInputDto = Pick<User, 'password' | 'id'>;
-export type CreateUserOutboundOutputDto = void;
+export type CreateUserOutboundOutputDto = User;
 
 export interface CreateUserOutboundPort {
   execute(
