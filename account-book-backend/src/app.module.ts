@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { AccountBookModule } from './account-book/account-book.module';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './user/entity/user.entity';
 
 @Module({
   imports: [
@@ -15,7 +16,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'mysql',
+      database: 'account_book_dev',
+      entities: [User],
+      synchronize: true,
     }),
   ],
   controllers: [AppController],
